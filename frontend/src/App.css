@@ -1,0 +1,48 @@
+.app-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.stock-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 20px;
+}
+
+.stock-card {
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.metrics-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+}
+
+.metrics-table th, .metrics-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.metrics-table th {
+  background-color: #f2f2f2;
+}
+
+.static-plot {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+h1, h2, h3 {
+  color: #333;
+}
