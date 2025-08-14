@@ -34,32 +34,8 @@ ALPHA_VANTAGE_API_KEY = os.getenv("ALPHA_VANTAGE_API_KEY")
 NEWS_API_KEY = os.getenv("NEWS_API_KEY")
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-# Validate environment variables
-if not all([ALPHA_VANTAGE_API_KEY, NEWS_API_KEY, DATABASE_URL]):
-    logger.error("Missing environment variables: ALPHA_VANTAGE_API_KEY=%s, NEWS_API_KEY=%s, DATABASE_URL=%s",
-                 ALPHA_VANTAGE_API_KEY, NEWS_API_KEY, DATABASE_URL)
-    raise ValueError("Required environment variables are missing")
 
-# Ensure DATABASE_URL uses asyncpg
-if not DATABASE_URL.startswith("postgresql+asyncpg://"):
-    logger.error("DATABASE_URL must use asyncpg, found: %s", DATABASE_URL)
-    raise ValueError("DATABASE_URL must start with 'postgresql+asyncpg://'")
 
-# Verify asyncpg is available
-try:
-    logger.debug("Asyncpg version: %s", asyncpg.__version__)
-except ImportError:
-    logger.error("asyncpg module not found")
-    raise ImportError("asyncpg is required for async database operations")
-
-# Test DNS resolution for Yahoo Finance domains
-for domain in ["finance.yahoo.com", "query1.finance.yahoo.com", "query2.finance.yahoo.com"]:
-    try:
-        ip = socket.gethostbyname(domain)
-        logger.debug("DNS resolution for %s successful: %s", domain, ip)
-    except socket.gaierror as e:
-        logger.error("DNS resolution failed for %s: %s", domain, e)
-        raise
 
 async def load_historical_data(init_db):
     logger.debug("Starting historical data load")
@@ -74,9 +50,16 @@ async def load_historical_data(init_db):
     
     async with async_session() as session:
         # Define penny stocks (NSE, price < ₹5)
-        symbols = ['GANGAFORGE.NS', 'AGSTRA.NS', 'VCL.NS', 'SUVIDHAA.NS', 'GVKPIL.NS',
+        symbols = ['GTLINFRA.NS', 'DHARAN.NS', 'FILATFASH.NS', 'GODHA.NS', 'GATECH.NS',
+    'EXCEL.NS', 'VIKASLIFE.NS', 'NDL.NS', 'VIKASECO.NS', 'GATECHDVR.NS',
+    'FCSSOFT.NS', 'RHFL.NS', 'TPHQ.NS', 'DAVANGERE.NS', 'ESSENTIA.NS',
+    'JPASSOCIAT.NS', 'NAVKARURB.NS', 'RCOM.NS', 'INVENTURE.NS', 'SHAH.NS',
+    'MITTAL.NS', 'AKSHAR.NS', 'GLOBE.NS', 'SAKUMA.NS', 'SHRENIK.NS',
+    'GANGAFORGE.NS', 'AGSTRA.NS', 'VCL.NS', 'SUVIDHAA.NS', 'GVKPIL.NS',
     'SUNDARAM.NS', 'RAJMET.NS', 'ANTGRAPHIC.NS', 'SANWARIA.NS']
         logger.debug("Processing symbols: %s", symbols)
+        start_date = "2025-01-01"
+        end_date = datetime.now().strftime("%Y-%m-%d")
         
         for symbol in symbols:
             try:
@@ -92,7 +75,7 @@ async def load_historical_data(init_db):
                 for attempt in range(max_retries):
                     try:
                         stock = yf.Ticker(symbol)
-                        df = stock.history(period="5d", interval="1d",raise_errors=True)
+                        df = stock.history(start=start_date, end=end_date, interval='1d')
                         if df.empty:
                             logger.warning("No historical data for %s", symbol)
                             continue
