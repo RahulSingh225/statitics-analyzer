@@ -1,83 +1,87 @@
-from drizzle_orm import pgTable, serial, text, jsonb, float64, timestamp
+from sqlalchemy import Column, Integer, String, Float, DateTime, JSON
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.sql import func
 
-stocks = pgTable('stocks', [
-    serial('id').primaryKey(),
-    text('symbol').notNull().unique(),
-    timestamp('created_at').defaultNow().notNull()
-])
+Base = declarative_base()
 
-daily_data = pgTable('daily_data', [
-    serial('id').primaryKey(),
-    text('symbol').notNull(),
-    timestamp('date').notNull(),
-    float64('open').notNull(),
-    float64('high').notNull(),
-    float64('low').notNull(),
-    float64('close').notNull(),
-    float64('volume').notNull(),
-    timestamp('created_at').defaultNow().notNull()
-])
+class Stock(Base):
+    __tablename__ = 'stocks'
+    id = Column(Integer, primary_key=True)
+    symbol = Column(String, nullable=False, unique=True)
+    created_at = Column(DateTime, nullable=False, server_default=func.now())
 
-financials = pgTable('financials', [
-    serial('id').primaryKey(),
-    text('symbol').notNull(),
-    timestamp('date').notNull(),
-    float64('pe_ratio').notNull(),
-    float64('eps').notNull(),
-    float64('revenue').notNull(),
-    float64('debt_to_equity').notNull(),
-    timestamp('created_at').defaultNow().notNull()
-])
+class DailyData(Base):
+    __tablename__ = 'daily_data'
+    id = Column(Integer, primary_key=True)
+    symbol = Column(String, nullable=False)
+    date = Column(DateTime, nullable=False)
+    open = Column(Float, nullable=False)
+    high = Column(Float, nullable=False)
+    low = Column(Float, nullable=False)
+    close = Column(Float, nullable=False)
+    volume = Column(Float, nullable=False)
+    created_at = Column(DateTime, nullable=False, server_default=func.now())
 
-indicators = pgTable('indicators', [
-    serial('id').primaryKey(),
-    text('symbol').notNull(),
-    timestamp('date').notNull(),
-    float64('sma5').notNull(),
-    float64('ema5').notNull(),
-    float64('rsi').notNull(),
-    float64('macd').notNull(),
-    float64('macd_signal').notNull(),
-    float64('upper_bb').notNull(),
-    float64('middle_bb').notNull(),
-    float64('lower_bb').notNull(),
-    float64('vwap').notNull(),
-    float64('atr').notNull(),
-    timestamp('created_at').defaultNow().notNull()
-])
+class Financial(Base):
+    __tablename__ = 'financials'
+    id = Column(Integer, primary_key=True)
+    symbol = Column(String, nullable=False)
+    date = Column(DateTime, nullable=False)
+    pe_ratio = Column(Float, nullable=False)
+    eps = Column(Float, nullable=False)
+    revenue = Column(Float, nullable=False)
+    debt_to_equity = Column(Float, nullable=False)
+    created_at = Column(DateTime, nullable=False, server_default=func.now())
 
-sentiments = pgTable('sentiments', [
-    serial('id').primaryKey(),
-    text('symbol').notNull(),
-    timestamp('date').notNull(),
-    float64('score').notNull(),
-    timestamp('created_at').defaultNow().notNull()
-])
+class Indicator(Base):
+    __tablename__ = 'indicators'
+    id = Column(Integer, primary_key=True)
+    symbol = Column(String, nullable=False)
+    date = Column(DateTime, nullable=False)
+    sma5 = Column(Float, nullable=False)
+    ema5 = Column(Float, nullable=False)
+    rsi = Column(Float, nullable=False)
+    macd = Column(Float, nullable=False)
+    macd_signal = Column(Float, nullable=False)
+    upper_bb = Column(Float, nullable=False)
+    middle_bb = Column(Float, nullable=False)
+    lower_bb = Column(Float, nullable=False)
+    vwap = Column(Float, nullable=False)
+    atr = Column(Float, nullable=False)
+    created_at = Column(DateTime, nullable=False, server_default=func.now())
 
-predictions = pgTable('predictions', [
-    serial('id').primaryKey(),
-    text('symbol').notNull(),
-    timestamp('date').notNull(),
-    float64('rf_prediction').notNull(),
-    float64('lstm_prediction').notNull(),
-    text('entry_exit_signal').notNull(),
-    timestamp('created_at').defaultNow().notNull()
-])
+class Sentiment(Base):
+    __tablename__ = 'sentiments'
+    id = Column(Integer, primary_key=True)
+    symbol = Column(String, nullable=False)
+    date = Column(DateTime, nullable=False)
+    score = Column(Float, nullable=False)
+    created_at = Column(DateTime, nullable=False, server_default=func.now())
 
-reports = pgTable('reports', [
-    serial('id').primaryKey(),
-    text('symbol').notNull(),
-    timestamp('date').notNull(),
-    text('report_text').notNull(),
-    timestamp('created_at').defaultNow().notNull()
-])
+class Prediction(Base):
+    __tablename__ = 'predictions'
+    id = Column(Integer, primary_key=True)
+    symbol = Column(String, nullable=False)
+    date = Column(DateTime, nullable=False)
+    rf_prediction = Column(Float, nullable=False)
+    lstm_prediction = Column(Float, nullable=False)
+    entry_exit_signal = Column(String, nullable=False)
+    created_at = Column(DateTime, nullable=False, server_default=func.now())
 
-model_metrics = pgTable('model_metrics', [
-    serial('id').primaryKey(),
-    text('symbol').notNull(),
-    timestamp('date').notNull(),
-    text('model_type').notNull(),  # 'rf' or 'lstm'
-    float64('accuracy').notNull(),
-    jsonb('parameters').notNull(),  # Best params for RF or LSTM config
-    timestamp('created_at').defaultNow().notNull()
-])
+class Report(Base):
+    __tablename__ = 'reports'
+    id = Column(Integer, primary_key=True)
+    symbol = Column(String, nullable=False)
+    date = Column(DateTime, nullable=False)
+    report_text = Column(String, nullable=False)
+    created_at = Column(DateTime, nullable=False, server_default=func.now())
+
+class ModelMetric(Base):
+    __tablename__ = 'model_metrics'
+    id = Column(Integer, primary_key=True)
+    symbol = Column(String, nullable=False)
+    date = Column(DateTime, nullable=False)
+    model_type = Column(String, nullable=False)
+    accuracy = Column(Float, nullable=False)
+    parameters = Column(JSON, nullable=False)
+    created_at = Column(DateTime, nullable=False, server_default=func.now())

@@ -1,0 +1,46 @@
+2025-08-13 19:40:44,093 - DEBUG - Asyncpg version: 0.30.0
+2025-08-13 19:40:44,186 - DEBUG - DNS resolution for finance.yahoo.com successful: 27.123.43.205
+2025-08-13 19:40:44,215 - DEBUG - DNS resolution for query1.finance.yahoo.com successful: 27.123.43.204
+2025-08-13 19:40:44,254 - DEBUG - DNS resolution for query2.finance.yahoo.com successful: 27.123.42.204
+2025-08-13 19:40:44,254 - DEBUG - Using selector: EpollSelector
+2025-08-13 19:40:44,255 - DEBUG - Starting historical data load
+2025-08-13 19:40:44,255 - DEBUG - Creating async engine with DATABASE_URL: postgresql+asyncpg://dbadmin:Test@123@13.200.12.122:5432/test_db
+2025-08-13 19:40:44,281 - DEBUG - Database engine created successfully with asyncpg
+2025-08-13 19:40:44,281 - DEBUG - Database session initialized successfully with asyncpg
+2025-08-13 19:40:44,281 - DEBUG - Processing symbols: ['GANGAFORGE.NS', 'AGSTRA.NS', 'VCL.NS', 'SUVIDHAA.NS', 'GVKPIL.NS', 'SUNDARAM.NS', 'RAJMET.NS', 'ANTGRAPHIC.NS', 'SANWARIA.NS']
+2025-08-13 19:40:44,284 - ERROR - Error processing GANGAFORGE.NS: [Errno -2] Name or service not known
+2025-08-13 19:40:44,285 - ERROR - Error processing AGSTRA.NS: [Errno -2] Name or service not known
+2025-08-13 19:40:44,286 - ERROR - Error processing VCL.NS: [Errno -2] Name or service not known
+2025-08-13 19:40:44,286 - ERROR - Error processing SUVIDHAA.NS: [Errno -2] Name or service not known
+2025-08-13 19:40:44,287 - ERROR - Error processing GVKPIL.NS: [Errno -2] Name or service not known
+2025-08-13 19:40:44,288 - ERROR - Error processing SUNDARAM.NS: [Errno -2] Name or service not known
+2025-08-13 19:40:44,289 - ERROR - Error processing RAJMET.NS: [Errno -2] Name or service not known
+2025-08-13 19:40:44,289 - ERROR - Error processing ANTGRAPHIC.NS: [Errno -2] Name or service not known
+2025-08-13 19:40:44,290 - ERROR - Error processing SANWARIA.NS: [Errno -2] Name or service not known
+2025-08-13 19:40:44,290 - INFO - Historical data load completed
+2025-08-13 19:48:17,538 - INFO - generated new fontManager
+2025-08-13 19:48:17,893 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-08-13 19:48:17,894 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-08-13 19:48:17,894 - INFO - Added job "daily_pipeline" to job store "default"
+2025-08-13 19:48:17,895 - INFO - Added job "weekly_retrain" to job store "default"
+2025-08-13 19:48:17,895 - INFO - Scheduler started
+2025-08-13 19:48:44,312 - DEBUG - Asyncpg version: 0.30.0
+2025-08-13 19:48:44,347 - DEBUG - DNS resolution for finance.yahoo.com successful: 27.123.43.204
+2025-08-13 19:48:44,360 - DEBUG - DNS resolution for query1.finance.yahoo.com successful: 27.123.42.205
+2025-08-13 19:48:44,394 - DEBUG - DNS resolution for query2.finance.yahoo.com successful: 27.123.43.205
+2025-08-13 19:48:44,395 - DEBUG - Using selector: EpollSelector
+2025-08-13 19:48:44,395 - DEBUG - Starting historical data load
+2025-08-13 19:48:44,395 - DEBUG - Creating async engine with DATABASE_URL: postgresql+asyncpg://dbadmin:Test@123@13.200.12.122:5432/test_db
+2025-08-13 19:48:44,417 - DEBUG - Database engine created successfully with asyncpg
+2025-08-13 19:48:44,418 - DEBUG - Database session initialized successfully with asyncpg
+2025-08-13 19:48:44,418 - DEBUG - Processing symbols: ['GANGAFORGE.NS', 'AGSTRA.NS', 'VCL.NS', 'SUVIDHAA.NS', 'GVKPIL.NS', 'SUNDARAM.NS', 'RAJMET.NS', 'ANTGRAPHIC.NS', 'SANWARIA.NS']
+2025-08-13 19:48:44,421 - ERROR - Error processing GANGAFORGE.NS: [Errno -2] Name or service not known
+2025-08-13 19:48:44,422 - ERROR - Error processing AGSTRA.NS: [Errno -2] Name or service not known
+2025-08-13 19:48:44,423 - ERROR - Error processing VCL.NS: [Errno -2] Name or service not known
+2025-08-13 19:48:44,423 - ERROR - Error processing SUVIDHAA.NS: [Errno -2] Name or service not known
+2025-08-13 19:48:44,424 - ERROR - Error processing GVKPIL.NS: [Errno -2] Name or service not known
+2025-08-13 19:48:44,424 - ERROR - Error processing SUNDARAM.NS: [Errno -2] Name or service not known
+2025-08-13 19:48:44,425 - ERROR - Error processing RAJMET.NS: [Errno -2] Name or service not known
+2025-08-13 19:48:44,425 - ERROR - Error processing ANTGRAPHIC.NS: [Errno -2] Name or service not known
+2025-08-13 19:48:44,426 - ERROR - Error processing SANWARIA.NS: [Errno -2] Name or service not known
+2025-08-13 19:48:44,426 - INFO - Historical data load completed
